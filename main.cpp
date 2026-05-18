@@ -6,54 +6,56 @@
 #include <string>
 
 static const float cubeVertices[] = {
-    // positions         // colors
-    -0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f,
-    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f,
-    -0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f,
+    // positions         // normals
+    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+     0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
 
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f,
-     0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f,
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+     0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-    -0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.0f,
-    -0.5f,  0.5f, -0.5f,  0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f,
-    -0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.0f,
+    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 0.0f,
-     0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 0.0f,
-     0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 0.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 1.0f,
-     0.5f, -0.5f,  0.5f,  0.0f, 1.0f, 1.0f,
-     0.5f, -0.5f,  0.5f,  0.0f, 1.0f, 1.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, 1.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+     0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 
-    -0.5f,  0.5f, -0.5f,  1.0f, 0.0f, 1.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 0.0f, 1.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 1.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 1.0f,
-    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 1.0f,
-    -0.5f,  0.5f, -0.5f,  1.0f, 0.0f, 1.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
 };
 
 static GLuint cubeVAO = 0;
 static GLuint cubeVBO = 0;
 static GLuint cubeProgram = 0;
 static float cubeColor[3] = {1.0f, 0.5f, 0.0f};
+static float lightDir[3] = {0.5f, 1.0f, 0.3f};
+static float lightColor[3] = {1.0f, 1.0f, 1.0f};
 
 static void multiply_mat4(float out[16], const float a[16], const float b[16]) {
     for (int col = 0; col < 4; ++col) {
@@ -148,19 +150,34 @@ static bool create_cube_resources() {
     const char* vertexSource = R"glsl(
         #version 330 core
         layout(location = 0) in vec3 aPos;
+        layout(location = 1) in vec3 aNormal;
         uniform mat4 uMVP;
+        uniform mat4 uModel;
+        out vec3 vNormal;
+        out vec3 vPosition;
         void main() {
+            vec4 worldPosition = uModel * vec4(aPos, 1.0);
+            vPosition = worldPosition.xyz;
+            vNormal = mat3(transpose(inverse(uModel))) * aNormal;
             gl_Position = uMVP * vec4(aPos, 1.0);
         }
     )glsl";
 
     const char* fragmentSource = R"glsl(
         #version 330 core
-        in vec3 vColor;
+        in vec3 vNormal;
+        in vec3 vPosition;
         uniform vec3 uColor;
+        uniform vec3 uLightDir;
+        uniform vec3 uLightColor;
         out vec4 FragColor;
         void main() {
-            FragColor = vec4(uColor, 1.0);
+            vec3 normal = normalize(vNormal);
+            vec3 lightDir = normalize(uLightDir);
+            float diff = max(dot(normal, lightDir), 0.0);
+            vec3 ambient = 0.15 * uColor;
+            vec3 diffuse = diff * uColor * uLightColor;
+            FragColor = vec4(ambient + diffuse, 1.0);
         }
     )glsl";
 
@@ -216,6 +233,9 @@ static void cleanup_cube_resources() {
 }
 
 static void render_cube(float timeSeconds, int width, int height) {
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+    glEnable(GL_DEPTH_TEST);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     if (!cubeProgram || !cubeVAO) {
         return;
     }
@@ -233,10 +253,23 @@ static void render_cube(float timeSeconds, int width, int height) {
     float mvp[16];
     multiply_mat4(mvp, pv, model);
 
+    float length = std::sqrt(lightDir[0] * lightDir[0] + lightDir[1] * lightDir[1] + lightDir[2] * lightDir[2]);
+    float normalizedLightDir[3] = {
+        lightDir[0] / length,
+        lightDir[1] / length,
+        lightDir[2] / length
+    };
+
     GLint mvpLocation = glGetUniformLocation(cubeProgram, "uMVP");
     glUniformMatrix4fv(mvpLocation, 1, GL_FALSE, mvp);
+    GLint modelLocation = glGetUniformLocation(cubeProgram, "uModel");
+    glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model);
     GLint colorLocation = glGetUniformLocation(cubeProgram, "uColor");
     glUniform3fv(colorLocation, 1, cubeColor);
+    GLint lightDirLocation = glGetUniformLocation(cubeProgram, "uLightDir");
+    glUniform3fv(lightDirLocation, 1, normalizedLightDir);
+    GLint lightColorLocation = glGetUniformLocation(cubeProgram, "uLightColor");
+    glUniform3fv(lightColorLocation, 1, lightColor);
 
     glBindVertexArray(cubeVAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
