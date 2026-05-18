@@ -6,29 +6,14 @@ int main() {
     bgui::set_up_gl3();
     bgui::set_up_freetype();
     bgui::style_manager::get_instance().apply_theme(bgui::dark_theme());
-    auto& w = bgui::get_layout().add<bgui::window>("infos");
-    auto& w2 = bgui::get_layout().add<bgui::window>("infos");
-    bgui::style_manager::get_instance().set_class("transparency", bgui::style{
-        .visual = {
-            .background = bgui::color{0, 5, 5, 0.5f}
-        }
-    });
-    bgui::style_manager::get_instance().set_class("center", bgui::style{
-        .layout = {
-            .size_mode = bgui::vec<2, bgui::mode>{bgui::mode::match_parent, bgui::mode::wrap_content},
-            .align = bgui::vec<2, bgui::alignment>{bgui::alignment::center, bgui::alignment::center}
-        }
-    });
-    w2.add_class("transparency");
-    w2.add<bgui::text>("Hello world", 0.5f).add_class("center");
-    w2.add<bgui::text>("Hello world", 0.5f).add_class("center");
-    w2.add<bgui::text>("Hello world", 0.5f).add_class("center");
-    w2.add<bgui::text>("Hello world", 0.5f).add_class("center");
-    w2.add<bgui::text>("Hello world", 0.5f).add_class("center");
+    auto& w = bgui::get_layout().add<bgui::window>("OpenGl info");
+    w.add<bgui::text>(std::string("gl version:\n ") + bgui::get_gl_version(), 0.35f);
+    w.add<bgui::text>(std::string("gl vendor:\n ") + bgui::get_gl_vendor(), 0.35f);
+    w.add<bgui::text>(std::string("glsl version:\n ") + bgui::get_glsl_version(), 0.35f);
 
     while (!bgui::should_close_glfw()) {
-        bgui::on_update();
         bgui::glfw_update(bgui::get_context());
+        bgui::on_update();
         bgui::gl3_render(bgui::get_draw_data());
         bgui::swap_glfw();
     }
