@@ -54,6 +54,7 @@ static GLuint cubeVAO = 0;
 static GLuint cubeVBO = 0;
 static GLuint cubeProgram = 0;
 static float cubeColor[3] = {1.0f, 0.5f, 0.0f};
+static float cubePos[3] = {0.0f, 0.0f, 0.0f};
 static float lightDir[3] = {0.5f, 1.0f, 0.3f};
 static float lightColor[3] = {1.0f, 1.0f, 1.0f};
 
@@ -245,8 +246,12 @@ static void render_cube(float timeSeconds, int width, int height) {
     perspective_mat4(projection, 45.0f * (3.14159265f / 180.0f), float(width) / float(height), 0.1f, 100.0f);
     float view[16];
     translate_mat4(view, 0.0f, 0.0f, -3.0f);
+    float modelRotation[16];
+    rotate_mat4(modelRotation, timeSeconds, 1.0f, 1.0f, 0.0f);
+    float modelTranslation[16];
+    translate_mat4(modelTranslation, cubePos[0], cubePos[1], cubePos[2]);
     float model[16];
-    rotate_mat4(model, timeSeconds, 1.0f, 1.0f, 0.0f);
+    multiply_mat4(model, modelTranslation, modelRotation);
 
     float pv[16];
     multiply_mat4(pv, projection, view);
@@ -300,18 +305,43 @@ int main() {
     });
     auto& w = bgui::get_layout().add<bgui::window>("OpenGl info");
     w.add_class("transparent");
-    w.add<bgui::text>(std::string("gl version:\n ") + bgui::get_gl_version(), 0.35f);
-    w.add<bgui::text>(std::string("gl vendor:\n ") + bgui::get_gl_vendor(), 0.35f);
-    w.add<bgui::text>(std::string("glsl version:\n ") + bgui::get_glsl_version(), 0.35f);
+    w.add<bgui::text>(std::string("gl version:\n") + bgui::get_gl_version(), 0.35f);
+    w.add<bgui::text>(std::string("gl vendor:\n") + bgui::get_gl_vendor(), 0.35f);
+    w.add<bgui::text>(std::string("glsl version:\n") + bgui::get_glsl_version(), 0.35f);
+    
+    auto& w2 = bgui::get_layout().add<bgui::window>("Performance");
+    w2.add_class("transparent");
+    auto& fps = w2.add<bgui::text>(std::string("FPS:\n") + std::to_string(bgui::get_fps()), 0.35f);
 
-    auto& colorText = w.add<bgui::text>(std::string("Cube color: ") + std::to_string(cubeColor[0]) + ", " + std::to_string(cubeColor[1]) + ", " + std::to_string(cubeColor[2]), 0.35f);
+    auto& posText = w.add<bgui::text>(std::string("Cube Position: ") + std::to_string(cubePos[0]) + ", " + std::to_string(cubePos[1]) + ", " + std::to_string(cubePos[2]), 0.35f);
+    auto updatePosText = [&](void) {
+        std::string buffer = "Cube position: " + std::to_string(cubePos[0]) + ", " + std::to_string(cubePos[1]) + ", " + std::to_string(cubePos[2]);
+        posText.set_buffer(buffer);
+    };
+    
+    auto& colorText = w.add<bgui::text>(std::string("Cube Color: R:") + std::to_string(cubeColor[0]) + ", G:" + std::to_string(cubeColor[1]) + ", B:" + std::to_string(cubeColor[2]), 0.35f);
     auto updateColorText = [&](void) {
-        std::string buffer = "Cube color: " + std::to_string(cubeColor[0]) + ", " + std::to_string(cubeColor[1]) + ", " + std::to_string(cubeColor[2]);
+        std::string buffer = "Cube color: R:" + std::to_string(cubeColor[0]) + ", G:" + std::to_string(cubeColor[1]) + ", B:" + std::to_string(cubeColor[2]);
         colorText.set_buffer(buffer);
     };
     auto clamp01 = [&](float value) {
         return value < 0.0f ? 0.0f : (value > 1.0f ? 1.0f : value);
     };
+
+    auto& posX = w.add<bgui::linear>(bgui::orientation::horizontal);
+    posX.style.layout.size_mode = bgui::vec<2, bgui::mode>{bgui::mode::match_parent, bgui::mode::wrap_content};
+    posX.add<bgui::button>("X-", 0.35f, [&]() { cubePos[0] -= 0.1f; updatePosText(); });
+    posX.add<bgui::button>("X+", 0.35f, [&]() { cubePos[0] += 0.1f; updatePosText(); });
+
+    auto& posY = w.add<bgui::linear>(bgui::orientation::horizontal);
+    posY.style.layout.size_mode = bgui::vec<2, bgui::mode>{bgui::mode::match_parent, bgui::mode::wrap_content};
+    posY.add<bgui::button>("Y-", 0.35f, [&]() { cubePos[1] -= 0.1f; updatePosText(); });
+    posY.add<bgui::button>("Y+", 0.35f, [&]() { cubePos[1] += 0.1f; updatePosText(); });
+
+    auto& posZ = w.add<bgui::linear>(bgui::orientation::horizontal);
+    posZ.style.layout.size_mode = bgui::vec<2, bgui::mode>{bgui::mode::match_parent, bgui::mode::wrap_content};
+    posZ.add<bgui::button>("Z-", 0.35f, [&]() { cubePos[2] -= 0.1f; updatePosText(); });
+    posZ.add<bgui::button>("Z+", 0.35f, [&]() { cubePos[2] += 0.1f; updatePosText(); });
 
     auto& rowR = w.add<bgui::linear>(bgui::orientation::horizontal);
     rowR.add<bgui::button>("R-", 0.35f, [&]() { cubeColor[0] = clamp01(cubeColor[0] - 0.05f); updateColorText(); });
@@ -332,6 +362,7 @@ int main() {
         bgui::glfw_update(bgui::get_context());
         bgui::on_update();
 
+        fps.set_buffer(std::string("FPS:\n") + std::to_string(bgui::get_fps()));
         int width = 800;
         int height = 600;
         glfwGetFramebufferSize(window, &width, &height);
